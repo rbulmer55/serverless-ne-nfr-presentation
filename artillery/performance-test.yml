@@ -1,0 +1,27 @@
+config:
+  target: '{{$env.API_URL}}'
+  phases:
+    - duration: 1 # Length of test
+      arrivalRate: 1 # Number of users
+      rampTo: 1 # Increase Users over time
+      name: WarmUp Phase
+    - pause: 5
+      name: WarmUp Wait Phase
+    - duration: 10 # Length of test
+      arrivalRate: 1 # Number of users
+      rampTo: 1 # Increase Users over time
+      name: Test Phase
+  plugins:
+    ensure: {}
+    apdex: {}
+    metrics-by-endpoint: {}
+  apdex:
+    threshold: 500
+  ensure:
+    thresholds:
+      - http.response_time.p99: 500
+      - http.response_time.p95: 300
+scenarios:
+  - flow:
+      - get:
+          url: '/customer/{{$env.ID_UNDER_TEST}}'

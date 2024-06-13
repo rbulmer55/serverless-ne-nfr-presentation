@@ -1,0 +1,299 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`All atlas-example stacks created and has correct properties Setup Stack 1`] = `
+{
+  "Outputs": {
+    "mongodbatlasbootstrapMongoSecretProfileSecretNameE90E97D9": {
+      "Value": {
+        "Fn::Select": [
+          0,
+          {
+            "Fn::Split": [
+              "-",
+              {
+                "Fn::Select": [
+                  6,
+                  {
+                    "Fn::Split": [
+                      ":",
+                      {
+                        "Ref": "mongodbatlasbootstrapMongoSecretProfilefdv7A097A41",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    },
+    "mongodbatlasbootstrapMongoSecretProfileUpdateSecretCommandB0F44ED7": {
+      "Value": {
+        "Fn::Join": [
+          "",
+          [
+            "aws secretsmanager update-secret --secret-id ",
+            {
+              "Fn::Select": [
+                0,
+                {
+                  "Fn::Split": [
+                    "-",
+                    {
+                      "Fn::Select": [
+                        6,
+                        {
+                          "Fn::Split": [
+                            ":",
+                            {
+                              "Ref": "mongodbatlasbootstrapMongoSecretProfilefdv7A097A41",
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+            " --secret-string "{\\"PublicKey\\":\\"\${MONGO_ATLAS_PUBLIC_KEY}\\",\\"PrivateKey\\":\\"\${MONGO_ATLAS_PRIVATE_KEY}\\"}"",
+          ],
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "mongodbatlasbootstrapAtlasCDKExecutionPolicyBF1939D6": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "secretsmanager:DescribeSecret",
+                "secretsmanager:GetSecretValue",
+                "ec2:CreateVpcEndpoint",
+                "ec2:DeleteVpcEndpoints",
+                "cloudformation:CreateResource",
+                "cloudformation:DeleteResource",
+                "cloudformation:GetResource",
+                "cloudformation:GetResourceRequestStatus",
+                "cloudformation:ListResources",
+                "cloudformation:UpdateResource",
+                "iam:AttachRolePolicy",
+                "iam:CreateRole",
+                "iam:DeleteRole",
+                "iam:GetRole",
+                "iam:GetRolePolicy",
+                "iam:ListAttachedRolePolicies",
+                "iam:ListRolePolicies",
+                "iam:PutRolePolicy",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "AtlasCDKExecution",
+        "Roles": [
+          {
+            "Ref": "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "mongodbatlasbootstrapClusterTypeActivation70BA7048": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::Cluster",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapDatabaseUserTypeActivation44D3FACB": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::DatabaseUser",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapMongoSecretProfilefdv7A097A41": {
+      "DeletionPolicy": "Delete",
+      "Properties": {
+        "Description": "Secret used for MongoDB Atlas Cloud Formation api keys",
+        "Name": "cfn/atlas/profile/fdv",
+        "SecretString": "{"PublicKey":"yourAtlasPublicKey", "PrivateKey": "yourAtlasPrivateKey"}",
+      },
+      "Type": "AWS::SecretsManager::Secret",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "mongodbatlasbootstrapPrivateEndpointAWSTypeActivation68576D71": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::PrivateEndpointAWS",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapPrivateEndpointServiceTypeActivationEE52C8DD": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::PrivateEndpointService",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapProjectIpAccessListTypeActivationBC91ACF9": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::ProjectIpAccessList",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapProjectTypeActivation96D41B0B": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::Project",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapServerlessInstanceTypeActivation5A33B942": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::ServerlessInstance",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapServerlessPrivateEndpointTypeActivationF14D4110": {
+      "Properties": {
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
+            "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA",
+            "Arn",
+          ],
+        },
+        "PublisherId": "bb989456c78c398a858fef18f2ca1bfc1fbba082",
+        "Type": "RESOURCE",
+        "TypeName": "MongoDB::Atlas::ServerlessPrivateEndpoint",
+      },
+      "Type": "AWS::CloudFormation::TypeActivation",
+    },
+    "mongodbatlasbootstrapmongoDBAtlasCFNExecutionRole53CC57FA": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudformation.amazonaws.com",
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "resources.cloudformation.amazonaws.com",
+              },
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "MaxSessionDuration": 8400,
+        "Path": "/",
+        "RoleName": "MongoDB-Atlas-CDK-CFN-EXT-mydomain-eu-west-1",
+      },
+      "Type": "AWS::IAM::Role",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
