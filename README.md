@@ -2,6 +2,8 @@
 
 This repo was developed to provide code examples for my talk on Serverless NFRs at Serverless North East.
 
+See the slide deck in `/slides`
+
 # Welcome to your CDK TypeScript project
 
 This is a blank project for CDK development with TypeScript.
